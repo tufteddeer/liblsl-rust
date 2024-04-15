@@ -36,12 +36,20 @@ fn build_liblsl() {
 
     // emit link directives
     let libdir = install_dir.join("lib");
-    let libname = "lsl";
     println!(
         "cargo:rustc-link-search=native={}",
         libdir.to_str().unwrap()
     );
+
+    let libdir64 = install_dir.join("lib64");
+    println!(
+        "cargo:rustc-link-search=native={}",
+        libdir64.to_str().unwrap()
+    );
+
+    let libname = "lsl";
     println!("cargo:rustc-link-lib=static={}", libname);
+
 
     // make sure we also link some additional libs
     if target.contains("linux") {
